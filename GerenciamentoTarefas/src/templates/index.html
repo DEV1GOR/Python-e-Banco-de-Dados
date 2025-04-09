@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Tarefas</title>
+     <!-- Estilão interno (porque às vezes a gente tá com preguiça de separar em outro arquivo CSS) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerenciamento de Tarefas</h1>
+    <a href="{{ url_for('adicionar') }}" class="btn">Adicionar Nova Tarefa</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if tarefas %}
+                {% for tarefa in tarefas %}
+                    <tr>
+                        <td>{{ tarefa[0] }}</td>
+                        <td>{{ tarefa[1] }}</td>
+                        <td>{{ 'Concluída' if tarefa[2] == 1 else 'Pendente' }}</td>
+                        <td>
+                            <a href="{{ url_for('editar', id_tarefa=tarefa[0]) }}">Editar</a> |
+                            <a href="{{ url_for('deletar', id_tarefa=tarefa[0]) }}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')">Deletar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhuma tarefa cadastrada.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Tarefa</h1>
+    
+    {% if tarefa %}
+        <form method="POST">
+            <p><strong>Descrição:</strong> {{ tarefa[1] }}</p>
+            <label>
+                <input type="checkbox" name="concluida" {% if tarefa[2] == 1 %}checked{% endif %}>
+                Concluída
+            </label>
+               <!-- Botão que diz "salvei sim", mesmo que você só tenha marcado a caixinha -->
+            <input type="submit" value="Salvar">
+        </form>
+    {% else %}
+        <p>Tarefa não encontrada.</p>
+    {% endif %}
+    <!-- Link pra você voltar correndo pra home e fingir que nunca veio aqui -->
+    <a href="{{ url_for('index') }}">Voltar</a>
+</body>
+</html>
