@@ -19,6 +19,5 @@ Este repositório contém exemplos práticos de como conectar e interagir com ba
 - Python 3.x
 - SQLite3
 - Biblioteca `sqlite3` (inclusa no Python)
-- VS Code (opcional)
 
 ---
